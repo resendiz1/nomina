@@ -21,3 +21,5 @@ Route::post('/cargando', [excelController::class, 'excel'])->name('excel');
 Route::get('/', [excelController::class, 'cargado'])->name('cargado');
 Route::get('/individual/{id}', [excelController::class, 'individual'])->name('ver');
 Route::get('/delete', [excelController::class, 'delete'])->name('delete');
+Route::patch('/individual/{id}/anotado', [excelController::class, 'anotaciones'])->name('anotaciones');
+Route::get('/exportar', [excelController::class, 'exportar'])->name('exportar');

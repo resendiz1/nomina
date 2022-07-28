@@ -16,7 +16,7 @@
                 <form action="{{route('excel')}}" enctype="multipart/form-data" method="POST">
                     @csrf @method('post')
                     <div class="form-group p-2">
-                        <input type="file" class="form-control " name="excel" required>
+                        <input type="file" accept=".xls, xlsx" class="form-control " name="excel" required>
                     </div>
                     <div class="form-group p-2">
                         <button class="btn btn-info">
@@ -61,10 +61,35 @@
 
         <div class="row justify-content-center mt-4 mb-5">
             <div class="col-4 text-center">
-                <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
-                    <i class="fa fa-eraser"></i>
-                    Borrar Actual Base de Datos
-                </a>
+                @if ($datos!=null)
+                    <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
+                        <i class="fa fa-eraser"></i>
+                        Borrar Actual Base de Datos
+                    </a>
+                      <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Do you want delete the database?</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            </div>
+                            <div class="modal-body text-center">
+                            <a href="{{route('delete')}}" class="btn btn-danger">Borrar Base de Datos</a>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    <br>
+                    <a href="{{route('exportar')}}" class="btn btn-success btn-sm mt-3">
+                        <i class="fa-regular fa-file-excel"></i>
+                        Exportar a Excel
+                    </a>
+                @endif
+
+                
             </div>
         </div>
     </div>
@@ -73,22 +98,6 @@
 
 
 
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Do you want delete the database?</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body text-center">
-          <a href="{{route('delete')}}" class="btn btn-danger">Borrar Base de Datos</a>
-        </div>
-      </div>
-    </div>
-  </div>
 
 
 

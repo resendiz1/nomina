@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ExcelExport;
 use App\Imports\ExcelImport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -25,10 +26,12 @@ class excelController extends Controller
         
     }
 
+
     public function cargado(){
         $datos = DB::select("SELECT DISTINCT nombre, numero FROM excels");
         return view('welcome', compact('datos'));
     }
+
 
 
     public function individual($numero){
@@ -37,8 +40,23 @@ class excelController extends Controller
         return view('individuales', compact('registros'));
     }
 
+
     public function delete(){
         ModelsExcel::truncate();
         return back();
     }
+
+    public function anotaciones($id){
+        $anotaciones = request('anotaciones');
+        //return ModelsExcel::find($id);
+         DB::update("UPDATE excels SET anotaciones = '$anotaciones' WHERE id LIKE $id");
+
+         return back();
+    
+    }
+
+    public function exportar(){
+        return Excel::download(new ExcelExport, 'nomina-revisada.xls');
+    }
+
 }

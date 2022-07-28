@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('estado');
             $table->string('dispositivos');
             $table->string('tipo');
+            $table->string('anotaciones')->default('Anotaciones');
             $table->timestamps();
         });
     }
